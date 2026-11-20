@@ -30,10 +30,11 @@ Está conectado como servidor MCP `jestive`. Herramientas: `generar_imagen`, `ge
 - Descarga lo generado con su `url_descarga` (dura 24 horas) a `proyectos/<producto>/` y anota el id en el guion.
 
 ## Dónde va cada cosa
-- `marca/`: logo, productos, tono y embudo. Léelos antes de escribir.
+- `marca/`: logo, productos, tono, embudo y **criterio de edición** (`edicion.md`). Léelos antes de escribir o editar.
 - `plantillas/`: guion de video, copy, calendario, ficha de producto, prompts de toma e imagen.
 - `proyectos/<producto>/`: guion, tomas, voz, `montaje.json` y el video final en `renders/` (no se suben a git).
-- `herramientas/montar.py`: arma el video final desde un `montaje.json` (necesita Python 3 y ffmpeg).
+- `herramientas/montar.py`: edita el video final en este PC con el criterio de la marca, desde un `montaje.json`
+  (necesita Python 3, ffmpeg y faster-whisper).
 
 ## Cómo responder
 - Corto y claro: qué hiciste, el resultado (archivo o enlace) y qué falta.

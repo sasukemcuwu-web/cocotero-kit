@@ -8,11 +8,13 @@ Kit para trabajar el contenido de **Cocotero** con Claude Code (VS Code): videos
 - `.claude/skills/marketing-cocotero`: copys, ideas, calendario, fichas de producto.
 - `plantillas/`: guion, prompt de toma e imagen, copy, calendario semanal, ficha de producto, `montaje.json`.
 - `marca/`: logo, productos, tono y embudo TOFU/MOFU/BOFU.
-- `herramientas/montar.py`: arma el MP4 final 1080x1920 con rótulos, voz, música y cierre con logo.
+- `herramientas/montar.py`: edita el MP4 final 1080x1920 con el criterio de Cocotero (`marca/edicion.md`): voz limpia,
+  subtítulos palabra por palabra, acercamiento, destellos, sonidos propios y cierre con logo.
 
 ## Instalar (una vez)
 1. Clonar: `git clone https://github.com/sasukemcuwu-web/cocotero-kit.git` y abrir la carpeta en VS Code.
-2. Python 3.10+ y ffmpeg: `winget install Python.Python.3.12` y `winget install Gyan.FFmpeg` (abrir una terminal nueva después).
+2. Python 3.10+, ffmpeg y los subtítulos: `winget install Python.Python.3.12`, `winget install Gyan.FFmpeg`
+   (abrir una terminal nueva) y `pip install faster-whisper`. Todo el montaje corre en tu PC.
 3. Conectar el estudio (Jestive) en Claude Code, con el conector que te pasa Juan:
    `claude mcp add --transport http jestive <URL>/mcp --header "Authorization: Bearer <TU_CLAVE>"`
    (si la URL cambia, Juan te pasa la nueva: `claude mcp remove jestive` y se vuelve a agregar).

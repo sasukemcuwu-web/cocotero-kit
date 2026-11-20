@@ -21,14 +21,16 @@ Lee antes: `CLAUDE.md`, `marca/embudo.md`, `marca/productos.md`, `marca/tono.md`
 - Si una toma sale con texto, cortes raros o un producto distinto, avisa y propón un prompt corregido (un reintento).
 
 ## 3. Voz
-- `generar_voz` con el texto completo de la voz en off (voz por defecto `lola`; si el equipo prefiere otra, úsala siempre).
-- Descarga a `proyectos/<producto>/voz/`. Una voz por video; no partas frase por frase (ahorra cupo).
+- `generar_voz` **una vez por frase** (una por toma) más la frase de cierre; voz por defecto `lola` (si el equipo elige
+  otra, úsala siempre). Descarga a `proyectos/<producto>/voz/f1.mp3`, `f2.mp3`, `f3.mp3`, `cierre.mp3`.
+- Las mismas frases sirven para TOFU/MOFU/BOFU del mismo producto: no las generes otra vez.
 
-## 4. Montaje (herramientas/montar.py)
-- Copia `plantillas/montaje.json` a `proyectos/<producto>/montaje-<etapa>.json` y ajusta: clips (con `desde`/`hasta`
-  para recortar), voz, música opcional, rótulos con sus tiempos (que coincidan con lo que dice la voz) y el cierre.
-- Corre: `python herramientas/montar.py proyectos/<producto>/montaje-<etapa>.json`
-- Sale un MP4 1080x1920 a 30 fps en `proyectos/<producto>/renders/`.
+## 4. Edición (herramientas/montar.py, criterio en marca/edicion.md)
+- Copia `plantillas/montaje.json` a `proyectos/<producto>/montaje-<etapa>.json`: tomas en orden (con `desde`/`hasta`
+  si hay que recortar), una frase por toma con su texto exacto, el cierre y las palabras clave del producto.
+- Corre: `python herramientas/montar.py proyectos/<producto>/montaje-<etapa>.json` (todo corre en este PC).
+- El script hace todo el criterio: voz recortada y nivelada, subtítulos palabra por palabra, acercamiento, destellos,
+  sonidos, cierre con logo y volumen final. Si avisa "Revisa estas palabras", compara con el guion y corrige.
 
 ## 5. Revisión antes de entregar
 - Que abra, dure lo esperado y el producto se vea en el primer segundo.
@@ -37,4 +39,5 @@ Lee antes: `CLAUDE.md`, `marca/embudo.md`, `marca/productos.md`, `marca/tono.md`
 - Entrega: ruta del video, el copy sugerido para la publicación (habilidad marketing-cocotero) y qué quedó pendiente.
 
 ## Requisitos de la máquina
-Python 3.10 o más y ffmpeg en el PATH (`winget install Gyan.FFmpeg` en Windows, con permiso del usuario).
+Python 3.10 o más, ffmpeg en el PATH (`winget install Gyan.FFmpeg`) y `pip install faster-whisper` (subtítulos
+palabra por palabra; la primera vez baja un modelo de ~0,5 GB). Pide permiso antes de instalar.

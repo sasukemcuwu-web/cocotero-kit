@@ -1,16 +1,17 @@
 {
-  "salida": "proyectos/ejemplo/renders/ejemplo-tofu.mp4",
-  "clips": [
-    {"archivo": "proyectos/ejemplo/tomas/toma-a.mp4", "desde": 0, "hasta": 4},
-    {"archivo": "proyectos/ejemplo/tomas/toma-b.mp4", "desde": 0.5, "hasta": 4.5}
+  "salida": "proyectos/ejemplo/renders/ejemplo-mofu.mp4",
+  "tomas": [
+    {"archivo": "proyectos/ejemplo/tomas/toma-a.mp4", "desde": 0, "hasta": 5.5},
+    {"archivo": "proyectos/ejemplo/tomas/toma-b.mp4", "desde": 0, "hasta": 5.5},
+    {"archivo": "proyectos/ejemplo/tomas/toma-c.mp4", "desde": 0, "hasta": 5.5}
   ],
-  "voz": "proyectos/ejemplo/voz/voz-tofu.mp3",
+  "frases": [
+    {"audio": "proyectos/ejemplo/voz/f1.mp3", "texto": "¿Tu limpieza de cara se queda a medias?"},
+    {"audio": "proyectos/ejemplo/voz/f2.mp3", "texto": "Cerdas de silicona suave, con tu limpiador de siempre."},
+    {"audio": "proyectos/ejemplo/voz/f3.mp3", "texto": "Y la piel se siente fresca."}
+  ],
+  "cierre": {"texto": "Respira. Suelta.", "audio": "proyectos/ejemplo/voz/cierre.mp3", "logo": "marca/logo-cocotero.png", "segundos_min": 3.8},
   "musica": null,
-  "volumen_musica": 0.12,
-  "textos": [
-    {"texto": "¿Tu limpieza se queda a medias?", "desde": 0.0, "hasta": 2.2},
-    {"texto": "silicona suave", "desde": 2.4, "hasta": 5.0},
-    {"texto": "con tu limpiador de siempre", "desde": 5.2, "hasta": 8.0}
-  ],
-  "cierre": {"logo": "marca/logo-cocotero.png", "texto": "Respira. Suelta.", "llamado": "Pídelo por el link", "duracion": 1.8}
+  "palabras_clave": ["silicona", "suave", "fresca", "link", "gota", "vapor", "niebla", "bolso", "ducha", "spa", "mañana"],
+  "modelo_whisper": "small"
 }
