@@ -15,9 +15,10 @@ Kit para trabajar el contenido de **Cocotero** con Claude Code (VS Code): videos
 1. Clonar: `git clone https://github.com/sasukemcuwu-web/cocotero-kit.git` y abrir la carpeta en VS Code.
 2. Python 3.10+, ffmpeg y los subtítulos: `winget install Python.Python.3.12`, `winget install Gyan.FFmpeg`
    (abrir una terminal nueva) y `pip install faster-whisper`. Todo el montaje corre en tu PC.
-3. Conectar el estudio (Jestive) en Claude Code, con el conector que te pasa Juan:
-   `claude mcp add --transport http jestive <URL>/mcp --header "Authorization: Bearer <TU_CLAVE>"`
-   (si la URL cambia, Juan te pasa la nueva: `claude mcp remove jestive` y se vuelve a agregar).
+3. Conectar el estudio (Jestive): `powershell -ExecutionPolicy Bypass -File herramientas\conectar-jestive.ps1`.
+   La primera vez pide tu **clave de acceso** (te la da Juan) y la guarda en `%USERPROFILE%\.cocotero\`, fuera del repo.
+   El script pide las credenciales actuales del estudio y lo conecta solo. **Si el estudio deja de responder, vuelve a
+   correrlo**: la dirección del estudio puede cambiar, tu clave no.
 4. Probar: pedirle a Claude "mira mi cupo del estudio" y "haz los 3 videos del producto 3".
 
 ## Probar el montaje sin generar nada
