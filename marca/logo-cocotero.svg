@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="bite" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#fff"/>
+      <circle cx="58" cy="19" r="13" fill="#000"/>
+    </mask>
+  </defs>
+  <g transform="rotate(-10 32 34)" mask="url(#bite)">
+    <circle cx="32" cy="34" r="27" fill="#146B47"/>
+    <circle cx="32" cy="34" r="22" fill="#F4E8CC"/>
+  </g>
+</svg>

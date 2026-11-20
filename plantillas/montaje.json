@@ -1,0 +1,16 @@
+{
+  "salida": "proyectos/ejemplo/renders/ejemplo-tofu.mp4",
+  "clips": [
+    {"archivo": "proyectos/ejemplo/tomas/toma-a.mp4", "desde": 0, "hasta": 4},
+    {"archivo": "proyectos/ejemplo/tomas/toma-b.mp4", "desde": 0.5, "hasta": 4.5}
+  ],
+  "voz": "proyectos/ejemplo/voz/voz-tofu.mp3",
+  "musica": null,
+  "volumen_musica": 0.12,
+  "textos": [
+    {"texto": "¿Tu limpieza se queda a medias?", "desde": 0.0, "hasta": 2.2},
+    {"texto": "silicona suave", "desde": 2.4, "hasta": 5.0},
+    {"texto": "con tu limpiador de siempre", "desde": 5.2, "hasta": 8.0}
+  ],
+  "cierre": {"logo": "marca/logo-cocotero.png", "texto": "Respira. Suelta.", "llamado": "Pídelo por el link", "duracion": 1.8}
+}

@@ -1,0 +1,7 @@
+proyectos/
+*.mp4
+*.mov
+*.mp3
+*.wav
+.env*
+__pycache__/
