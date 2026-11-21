@@ -15,11 +15,9 @@ Kit para trabajar el contenido de **Cocotero** con Claude Code (VS Code): videos
 1. Clonar: `git clone https://github.com/sasukemcuwu-web/cocotero-kit.git` y abrir la carpeta en VS Code.
 2. Python 3.10+, ffmpeg y los subtítulos: `winget install Python.Python.3.12`, `winget install Gyan.FFmpeg`
    (abrir una terminal nueva) y `pip install faster-whisper`. Todo el montaje corre en tu PC.
-3. Conectar el estudio (Jestive): `powershell -ExecutionPolicy Bypass -File herramientas\conectar-jestive.ps1`.
-   La primera vez pide tu **clave de acceso** (te la da Juan) y la guarda en `%USERPROFILE%\.cocotero\`, fuera del repo.
-   El script pide las credenciales actuales del estudio y lo conecta solo. **Si el estudio deja de responder, vuelve a
-   correrlo**: la dirección del estudio puede cambiar, tu clave no.
-4. Probar: pedirle a Claude "mira mi cupo del estudio" y "haz los 3 videos del producto 3".
+3. Conectar Higgsfield como conector en tu cuenta de Claude (claude.ai > Configuración > Conectores). Las tomas, la voz
+   y las imágenes se generan ahí con tus créditos.
+4. Probar: pedirle a Claude "mira mis créditos de Higgsfield" y "haz los 3 videos del producto 3".
 
 ## Probar el montaje sin generar nada
 `python herramientas/montar.py plantillas/montaje.json` (necesita clips en `proyectos/ejemplo/tomas/`).

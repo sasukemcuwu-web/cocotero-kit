@@ -1,6 +1,6 @@
 ---
 name: video-cocotero
-description: Hace un video corto vertical (9:16) de un producto de Cocotero de punta a punta - guion por etapa del embudo, tomas con el estudio Jestive, voz, montaje con subtítulos y cierre con logo. Úsala cuando pidan un video, un reel, un TikTok o "los 3 videos" de un producto.
+description: Hace un video corto vertical (9:16) de un producto de Cocotero de punta a punta - guion por etapa del embudo, tomas y voz con Higgsfield, montaje con subtítulos y cierre con logo. Úsala cuando pidan un video, un reel, un TikTok o "los 3 videos" de un producto.
 ---
 
 # Video de Cocotero
@@ -13,16 +13,17 @@ Lee antes: `CLAUDE.md`, `marca/embudo.md`, `marca/productos.md`, `marca/tono.md`
   rótulos de 2–5 palabras y cierre. Nada inventado; lo no confirmado va como `[POR CONFIRMAR]`.
 
 ## 2. Tomas (plantillas/prompt-toma.md)
-- Mira `mi_cupo`. Una toma corta de 4 o 6 s gasta "video corto" (5 al día); 8 o 10 s gasta "video largo" (3 al día).
-- `generar_video` con `aspecto: "9:16"`. Escribe el prompt en inglés con la plantilla: una acción, un plano, sin texto,
-  sin cortes, el producto descrito como es en la foto real.
-- Lanza las tomas y, mientras se generan, haz la voz. Consulta con `estado_video`; al completarse descarga cada una con su
-  `url_descarga` a `proyectos/<producto>/tomas/` (por ejemplo con `curl -L -o toma-a.mp4 "<url>"`).
+- Antes de generar, mira el saldo de créditos de Higgsfield y estima el costo de las tomas (`estimate_video_cost`). Dile al
+  usuario cuánto va a gastar en una línea y sigue; si la tanda gasta más de la mitad del saldo, pregunta primero.
+- `generate_video` en vertical 9:16, 4 a 6 s por toma. Escribe el prompt en inglés con la plantilla: una acción, un plano,
+  sin texto, sin cortes, el producto descrito como es en la foto real. Si tienes la foto del producto, súbela como referencia.
+- Lanza las tomas y, mientras se generan, haz la voz. Espera los trabajos y descarga cada toma a
+  `proyectos/<producto>/tomas/` (por ejemplo con `curl -L -o toma-a.mp4 "<url>"`).
 - Si una toma sale con texto, cortes raros o un producto distinto, avisa y propón un prompt corregido (un reintento).
 
 ## 3. Voz
-- `generar_voz` **una vez por frase** (una por toma) más la frase de cierre; voz por defecto `lola` (si el equipo elige
-  otra, úsala siempre). Descarga a `proyectos/<producto>/voz/f1.mp3`, `f2.mp3`, `f3.mp3`, `cierre.mp3`.
+- `generate_audio` (voz hablada) **una vez por frase** (una por toma) más la frase de cierre, en español con acento
+  colombiano suave, siempre la misma voz (la que elija el equipo). Descarga a `proyectos/<producto>/voz/f1.mp3`, `f2.mp3`, `f3.mp3`, `cierre.mp3`.
 - Las mismas frases sirven para TOFU/MOFU/BOFU del mismo producto: no las generes otra vez.
 
 ## 4. Edición (herramientas/montar.py, criterio en marca/edicion.md)
@@ -39,5 +40,5 @@ Lee antes: `CLAUDE.md`, `marca/embudo.md`, `marca/productos.md`, `marca/tono.md`
 - Entrega: ruta del video, el copy sugerido para la publicación (habilidad marketing-cocotero) y qué quedó pendiente.
 
 ## Requisitos de la máquina
-Python 3.10 o más, ffmpeg en el PATH (`winget install Gyan.FFmpeg`) y `pip install faster-whisper` (subtítulos
-palabra por palabra; la primera vez baja un modelo de ~0,5 GB). Pide permiso antes de instalar.
+Python 3.10 o más, ffmpeg en el PATH y faster-whisper (subtítulos palabra por palabra). En la Chromebook ya está todo
+en `.venv` y el lanzador lo activa; en equipos chicos usa el modelo `base` y renderiza en 1080x1920, un render a la vez.

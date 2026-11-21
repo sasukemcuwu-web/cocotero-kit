@@ -4,7 +4,7 @@ Trabajas con el equipo de **Cocotero**, una tienda de dropshipping en Colombia (
 personal en tonos verdes y crema. Lema de la marca: **"Respira. Suelta."** Logo: un coco verde con hoja, en `marca/`.
 
 ## Qué haces aquí
-1. **Videos cortos verticales (9:16)** para TikTok, Reels y Shorts: guion, tomas generadas con el estudio (Jestive),
+1. **Videos cortos verticales (9:16)** para TikTok, Reels y Shorts: guion, tomas y voz generadas con Higgsfield,
    voz, montaje con subtítulos y cierre con el logo. Habilidad: `video-cocotero`.
 2. **Marketing**: ganchos, copys, calendario de publicaciones, ideas por producto y etapa del embudo.
    Habilidad: `marketing-cocotero`.
@@ -19,18 +19,16 @@ personal en tonos verdes y crema. Lema de la marca: **"Respira. Suelta."** Logo:
 - Tono: calmado, cálido, de ritual de cuidado (respirar, soltar, tu momento). Nada de gritos ni MAYÚSCULAS sostenidas.
 - Sin emojis en los rótulos del video; en los copys, como máximo 1 o 2 y que tengan sentido.
 
-## El estudio (Jestive)
-Está conectado como servidor MCP `jestive`. Herramientas: `generar_imagen`, `generar_voz`, `generar_video`,
-`estado_video`, `obtener_generacion`, `mi_cupo`.
-- Cupo por día (se reinicia a medianoche, hora de Colombia): 20 imágenes, 5 videos cortos (4–6 s), 3 videos largos
-  (8–10 s), 30 voces. Antes de una tanda grande, mira `mi_cupo` y planea dentro de lo que queda.
-- Los videos tardan varios minutos: lanza el video, y mientras tanto haz la voz, los textos o la imagen.
+## Generación (Higgsfield)
+Está conectado como conector de Claude (`Higgsfield`). Para un video usa sobre todo: `generate_video` (tomas),
+`generate_audio` (voz hablada), `generate_image` (portadas o referencias), `estimate_video_cost` y el saldo de créditos.
+Si no ves una herramienta, búscala con ToolSearch "higgsfield".
+- Gasta créditos de la cuenta de Emilio: antes de una tanda, estima el costo y dilo en una línea. Si gasta más de la
+  mitad del saldo, pregunta primero.
+- Los videos tardan varios minutos: lanza las tomas, y mientras tanto haz la voz, los textos o la imagen.
 - Cada toma: **una sola acción, un solo plano, sin cortes ni texto dentro**. Los rótulos se ponen en el montaje.
-- Si el estudio falla, dilo en una frase y ofrece reintentar. No inventes causas.
-- Si el servidor `jestive` no conecta o no aparece, corre `bash herramientas/conectar-jestive.sh` en Linux/Chromebook
-  (en Windows: `powershell -ExecutionPolicy Bypass -File herramientas\conectar-jestive.ps1`). Pide las credenciales
-  actuales y lo reconecta; luego dile al usuario que reinicie la conversación. Nunca muestres la clave.
-- Descarga lo generado con su `url_descarga` (dura 24 horas) a `proyectos/<producto>/` y anota el id en el guion.
+- Si Higgsfield falla, dilo en una frase y ofrece reintentar. No inventes causas.
+- Descarga lo generado a `proyectos/<producto>/` y anota el id del trabajo en el guion.
 
 ## Dónde va cada cosa
 - `marca/`: logo, productos, tono, embudo y **criterio de edición** (`edicion.md`). Léelos antes de escribir o editar.
