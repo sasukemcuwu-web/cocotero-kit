@@ -19,7 +19,7 @@ JSON (ver plantillas/montaje.json):
   cierre {texto, audio (frase de cierre en voz, opcional), logo, segundos_min}, musica (opcional),
   palabras_clave [..], modelo_whisper ("small" por defecto)
 """
-import json, shutil, subprocess, sys, tempfile, unicodedata
+import json, os, shutil, subprocess, sys, tempfile, unicodedata
 from pathlib import Path
 
 KIT = Path(__file__).resolve().parent.parent
@@ -197,13 +197,13 @@ def main():
         fc.append(f"{voz_lbl}atrim=0:{total:.3f},loudnorm=I=-15:TP=-1.5:LRA=9[aout]")
         crudo = tmp / "crudo.mp4"
         ff(*ent, "-filter_complex", ";".join(fc), "-map", cadena, "-map", "[aout]", "-t", f"{total:.3f}", "-c:v", "libx264",
-           "-crf", "18", "-preset", "medium", "-c:a", "aac", "-b:a", "192k", crudo)
+           "-crf", "18", "-preset", os.environ.get("COCOTERO_PRESET", "medium"), "-c:a", "aac", "-b:a", "192k", crudo)
         # 6) subtítulos palabra por palabra sobre la parte principal
         claves = {sin_tildes(x) for x in cfg.get("palabras_clave", [])}
-        grupos = palabras(voces, frases[: len(voces)], cfg.get("modelo_whisper", "small"), claves) if voces else []
+        grupos = palabras(voces, frases[: len(voces)], cfg.get("modelo_whisper", os.environ.get("COCOTERO_WHISPER", "small")), claves) if voces else []
         print("Subtítulos:", " | ".join(f"{g['t0']:.1f} {g['w']}" for g in grupos))
         ass(grupos, principal, tmp / "subs.ass")
-        ff("-i", crudo, "-vf", "subtitles=subs.ass", "-c:v", "libx264", "-crf", "18", "-preset", "medium", "-pix_fmt", "yuv420p",
+        ff("-i", crudo, "-vf", "subtitles=subs.ass", "-c:v", "libx264", "-crf", "18", "-preset", os.environ.get("COCOTERO_PRESET", "medium"), "-pix_fmt", "yuv420p",
            "-c:a", "copy", "-movflags", "+faststart", salida.resolve(), cwd=tmp)
         print(f"Listo: {salida}  ({total:.1f} s: {principal:.1f} s de tomas + {cola:.1f} s de cierre)")
     finally:

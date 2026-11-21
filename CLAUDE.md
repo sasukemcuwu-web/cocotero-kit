@@ -27,8 +27,9 @@ Está conectado como servidor MCP `jestive`. Herramientas: `generar_imagen`, `ge
 - Los videos tardan varios minutos: lanza el video, y mientras tanto haz la voz, los textos o la imagen.
 - Cada toma: **una sola acción, un solo plano, sin cortes ni texto dentro**. Los rótulos se ponen en el montaje.
 - Si el estudio falla, dilo en una frase y ofrece reintentar. No inventes causas.
-- Si el servidor `jestive` no conecta o no aparece, corre `powershell -ExecutionPolicy Bypass -File herramientas\conectar-jestive.ps1`
-  (pide las credenciales actuales y lo reconecta), y dile al usuario que reinicie la conversación. Nunca muestres la clave.
+- Si el servidor `jestive` no conecta o no aparece, corre `bash herramientas/conectar-jestive.sh` en Linux/Chromebook
+  (en Windows: `powershell -ExecutionPolicy Bypass -File herramientas\conectar-jestive.ps1`). Pide las credenciales
+  actuales y lo reconecta; luego dile al usuario que reinicie la conversación. Nunca muestres la clave.
 - Descarga lo generado con su `url_descarga` (dura 24 horas) a `proyectos/<producto>/` y anota el id en el guion.
 
 ## Dónde va cada cosa
