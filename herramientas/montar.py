@@ -206,6 +206,12 @@ def main():
         ff("-i", crudo, "-vf", "subtitles=subs.ass", "-c:v", "libx264", "-crf", "18", "-preset", os.environ.get("COCOTERO_PRESET", "medium"), "-pix_fmt", "yuv420p",
            "-c:a", "copy", "-movflags", "+faststart", salida.resolve(), cwd=tmp)
         print(f"Listo: {salida}  ({total:.1f} s: {principal:.1f} s de tomas + {cola:.1f} s de cierre)")
+        # Copia del final en la carpeta de videos del usuario, fácil de abrir (COCOTERO_VIDEOS o ~/Videos si existe)
+        videos = Path(os.environ.get("COCOTERO_VIDEOS") or (Path.home() / "Videos")).expanduser()
+        if videos.is_dir():
+            destino = videos / "Cocotero"; destino.mkdir(exist_ok=True)
+            shutil.copy2(salida, destino / salida.name)
+            print(f"Copia en: {destino / salida.name}")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
