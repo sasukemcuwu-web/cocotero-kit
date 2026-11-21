@@ -34,8 +34,17 @@ done
 rm -f /tmp/.jestive-cred.json
 [ -n "$CRED" ] || { echo 'No se pudieron obtener las credenciales. Prueba en unos minutos o avisa a Juan.' >&2; exit 1; }
 
-URL=$(printf '%s' "$CRED" | python3 -c 'import json,sys; print(json.JSONDecoder().raw_decode(sys.stdin.read().strip())[0]["mcp_url"])')
-KEY=$(printf '%s' "$CRED" | python3 -c 'import json,sys; print(json.JSONDecoder().raw_decode(sys.stdin.read().strip())[0]["api_key"])')
-claude mcp remove jestive -s user >/dev/null 2>&1 || true
-claude mcp add -s user --transport http jestive "$URL" --header "Authorization: Bearer $KEY" >/dev/null
+# Escribe el servidor en ~/.claude.json (alcance de usuario) directamente: `claude mcp add` tarda minutos en equipos chicos.
+# Hazlo con Claude Code cerrado (el lanzador lo corre antes de abrirlo).
+printf '%s' "$CRED" | python3 -c '
+import json, os, sys
+c = json.JSONDecoder().raw_decode(sys.stdin.read().strip())[0]
+p = os.path.expanduser("~/.claude.json")
+d = json.load(open(p)) if os.path.exists(p) else {}
+d.setdefault("mcpServers", {})["jestive"] = {"type": "http", "url": c["mcp_url"],
+    "headers": {"Authorization": "Bearer " + c["api_key"]}}
+tmp = p + ".tmp"
+json.dump(d, open(tmp, "w"), indent=2)
+os.chmod(tmp, 0o600); os.replace(tmp, p)
+'
 [ $SIL = 1 ] || echo 'Jestive conectado. Reinicia la conversación de Claude Code para usarlo.'
