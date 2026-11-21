@@ -25,7 +25,8 @@ for i in $(seq 1 12); do   # el enlace fijo a veces falla unos segundos: reinten
     rm -f /tmp/.jestive-cred.json; echo "La clave de acceso no sirve: pídele a Juan una nueva y borra $ARCHIVO" >&2; exit 1
   fi
   if [ "$COD" = 200 ]; then
-    CRED=$(python3 -c 'import json,sys; print(json.load(open("/tmp/.jestive-cred.json"))["choices"][0]["message"]["content"])' 2>/dev/null || true)
+    # raw_decode: a veces la respuesta trae texto extra después del JSON
+    CRED=$(python3 -c 'import json; t=open("/tmp/.jestive-cred.json").read().strip(); print(json.JSONDecoder().raw_decode(t)[0]["choices"][0]["message"]["content"])' 2>/dev/null || true)
     [ -n "$CRED" ] && break
   fi
   [ $SIL = 1 ] || echo "Intento $i sin respuesta, reintento en 10 s..."; sleep 10
@@ -33,8 +34,8 @@ done
 rm -f /tmp/.jestive-cred.json
 [ -n "$CRED" ] || { echo 'No se pudieron obtener las credenciales. Prueba en unos minutos o avisa a Juan.' >&2; exit 1; }
 
-URL=$(printf '%s' "$CRED" | python3 -c 'import json,sys; print(json.load(sys.stdin)["mcp_url"])')
-KEY=$(printf '%s' "$CRED" | python3 -c 'import json,sys; print(json.load(sys.stdin)["api_key"])')
+URL=$(printf '%s' "$CRED" | python3 -c 'import json,sys; print(json.JSONDecoder().raw_decode(sys.stdin.read().strip())[0]["mcp_url"])')
+KEY=$(printf '%s' "$CRED" | python3 -c 'import json,sys; print(json.JSONDecoder().raw_decode(sys.stdin.read().strip())[0]["api_key"])')
 claude mcp remove jestive -s user >/dev/null 2>&1 || true
 claude mcp add -s user --transport http jestive "$URL" --header "Authorization: Bearer $KEY" >/dev/null
 [ $SIL = 1 ] || echo 'Jestive conectado. Reinicia la conversación de Claude Code para usarlo.'
